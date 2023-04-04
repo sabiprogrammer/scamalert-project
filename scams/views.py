@@ -80,7 +80,6 @@ def shared_stories(request):
         post_count = int(json.load(request)['postCount'])
         
         stories = SharedStoriesModel.objects.all().order_by("-date_reported")[post_count:post_count + 3]
-        print("S: ", stories)
         result = {
             'stories': serialize("json", stories),
             'post_count': post_count,
@@ -105,5 +104,4 @@ def story_details(request, story_slug, story_pk):
         'story': story,
         'loss_suffered': loss_suffered,
     }
-    print("L: ", loss_suffered)
     return render(request, 'scams/single_story_detail.html', context)
