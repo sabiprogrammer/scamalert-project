@@ -286,7 +286,7 @@
     }
     const csrftoken = getCookie('csrftoken');
 
-    let postCount = 1;
+    let postCount = 3;
 
     loadMoreBtn.addEventListener("click", (e)=>{
         e.preventDefault();
@@ -311,7 +311,7 @@
             .then(data=>{
 
                
-                postCount = postCount + 2;
+                postCount = postCount + 3;
 
                 let stories = JSON.parse(data['stories']);
                 

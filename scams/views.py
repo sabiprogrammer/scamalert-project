@@ -79,7 +79,7 @@ def shared_stories(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         post_count = int(json.load(request)['postCount'])
         
-        stories = SharedStoriesModel.objects.all()[post_count:post_count + 2]
+        stories = SharedStoriesModel.objects.all()[post_count:post_count + 3]
         
         result = {
             'stories': serialize("json", stories),
@@ -87,7 +87,7 @@ def shared_stories(request):
         }
         return JsonResponse(result)
     else:
-        post_count = 1
+        post_count = 3
         stories = SharedStoriesModel.objects.all()[:post_count]
 
         context = {
