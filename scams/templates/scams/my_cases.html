@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} {{user.user_profile.full_name | title}} Cases {% endblock page_title %}
+
+{% block content %}
+{% include 'dashboard/partials/structure.html' %}
+<div class="scam-count-container">
+    <span class="make-circle__danger">
+        {% if my_cases.count >= 100 %}
+        {{my_cases.count}}+
+        {% else %}
+        {{my_cases.count}}
+        {% endif %}
+    </span>
+    <h4>
+        Cases you're following
+    </h4>
+</div>
+
+{% for case in my_cases %}
+<article class="found-person-reports-container mt-3">
+    <div>
+        <div>
+            <a href="#" class="flex">
+                <img src="{{request.user.user_profile.get_image_url}}" alt="{{request.user.user_profile.full_name}} profile picture" style="border-radius: 50%;"/>
+                <strong class="reporter-name">{{request.user.user_profile.full_name|truncatechars:12}}</strong>
+            </a>
+            <small class="moment-ago">
+                <span class="dot"></span>
+                Raised Alarm
+                <span class="raised-alarm">{{case.date_reported|timesince}}</span>
+                ago
+            </small>
+        </div>
+        
+        <h3 class="mt-1">
+            <a href="#">
+                {{case.info_to_public|title|truncatewords:15}}
+            </a>
+        </h3>
+        
+        <p class="sm__opac">
+            {{case.describe_what_happened|title|truncatewords:32}}
+        </p>
+        
+        <div class="post-socials pb-2">
+            <span>
+                <i class="bi bi-chat-right-text-fill"></i>
+                <span><span>2</span> comments</span>
+            </span>
+            <span>
+                <i class="bi bi-share-fill"></i>
+                <span><span>2k</span> shares</span>
+            </span>
+            <span>
+                <i class="bi bi-bookmarks-fill"></i>
+                <span><span>200</span> following</span>
+            </span>
+        </div>
+        
+        <hr />
+    </div>
+    <div class="scammer-img-container scammer-img-container__user-dashboard">
+        <img src="{{case.get_scammer_pic}}" alt="{{story.scammer_fullname_or_website}}"/>
+    </div>
+</article>
+
+{% empty %}
+
+<h3>You are not following any case at the moment.</h3>
+
+{% endfor %}
+</section>
+</section>
+</main>
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% load static %}
+<!-- MAIN SITE SECTION -->
+<section class="intro-section-header">
+    <header class="container flex space-between">
+        <div>
+            <h2>My account</h2>
+            <p>
+                Manage your profile report, feedback from here
+            </p>
+        </div>
+        <div>
+            <img src="{% static 'images/auth/vector.png' %}" alt="shield" class="amour" />
+        </div>
+    </header>
+</section>
+
+
+<main class="container">
+    {% include 'base/partials/flash_messages.html' %}
+
+    <div class="yellow-info-container">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <article>
+            Over 2000 Nigerians are been scammed by individual, fake companies, website - online. Let's join hands to
+            protect each
+            other to reduce scam in our society.
+        </article>
+    </div>
+    <section class="profile-details-edit-container">
+        <section class="mobile-flex">
+            <img src="{{request.user.user_profile.picture.url}}" alt="person picture" />
+            <div>
+                <h3>{{request.user.user_profile.full_name|title}}</h3>
+                <div class="person-info">
+                    <p>{{request.user.user_profile.gender|title}}</p>
+                    <p>{{request.user.user_profile.country|title}}</p>
+                    <p>{{request.user.email}}</p>
+                    <p>You joined {{request.user.user_profile.date_created|date:"M d, Y"}}</p>
+                </div>
+                <p>
+                    <a href="{% url 'account:logout' %}" class="btn">
+                        <i class="fa-solid fa-right-from-bracket"></i> 
+                        Logout
+                    </a>
+                </p>
+            </div>
+        </section>
+        <section class="profile-details" style="max-width:700px;">
+            <div class="nav-links-container">
+                <a href="{% url 'account:user-profile' %}" {% if "profile" in request.build_absolute_uri  %} class="active" {% endif %}>Profile & Notification</a>
+                <a href="{% url 'scams:my-reports' %}" {% if "my-reports" in request.build_absolute_uri  %} class="active" {% endif %}>Scam Reported</a>
+                <a href="{% url 'scams:my-opinions' %}" {% if "my-opinions" in request.build_absolute_uri  %} class="active" {% endif %}>Opinion dropped</a>
+                <a href="{% url 'scams:cases-i-follow' %}" class="following-cases {% if 'cases-i-follow' in request.build_absolute_uri  %} active {% endif %}">Following cases</a>
+            </div>

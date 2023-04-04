@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} About us {% endblock page_title %}
+
+{% block content %}
+    <!-- MAIN SITE SECTION -->
+    <section class="intro-section-header">
+        <header class="container flex space-between">
+            <div>
+                <h2>About Us</h2>
+                <p>
+                    We are commited to resucing scam rate in our society
+                </p>
+            </div>
+            <div>
+                <img src="{% static 'images/auth/vector.png' %}" alt="shield" class="amour" />
+            </div>
+        </header>
+    </section>
+
+
+   <main class="container">
+    <section>
+        <h2 class="text-center mt-4">A team on a mission</h2>
+        <p>
+            Our focus is simple - committed to promoting public awareness and concern about scam and phishing sites and to propagate
+            the concept of self-help in scam protection.
+        </p>
+        <p>
+            We believe the most effective way to achieve that purpose is to provide intuitive technology that empowers the public to
+            report a scammer or phishing site and also provide a means for people to first check identity before transacting to
+            build more trust and quality relationship.
+        </p>
+    </section>
+    <h2 class="text-center m-5 au-fight-crime">
+        Let's fighting scammers & phishing site with Scam Alert
+    </h2>
+    <section class="au-fighting-scam">
+        <article>
+            <img src="{% static 'images/aboutus/report.png' %}" alt="report a scammer"/>
+            <div>
+                <h3>Report a scammer or site through scam alert</h3>
+                <p>
+                    Create an awareness through Scam Alert to protect others from been victimized by a scammer or phishing site.
+                </p>
+            </div>
+        </article>
+        <article>
+            <img src="{% static 'images/aboutus/verify.png' %}" alt="verify a scammer"/>
+            <div>
+                <h3>Verify identity before transacting online</h3>
+                <p>
+                    Check on Scam Alert to see if a person or website have been reported as scammer before building mutual trust.
+                </p>
+            </div>
+        </article>
+        <article>
+            <img src="{% static 'images/aboutus/article.png' %}" alt="article a scammer"/>
+            <div>
+                <h3>Access educative Articles on scam</h3>
+                <p>
+                    Get access to free educational articles on latest scamming to stay vigilant & be protected.
+                </p>
+            </div>
+        </article>
+        <article>
+            <img src="{% static 'images/aboutus/scammers.png' %}" alt="the scammers"/>
+            <div>
+                <h3>#1 trusted Scammers database</h3>
+                <p>
+                    With Scam Alert we can build a database of scammer & phishing site to always protect each other.
+                </p>
+            </div>
+        </article>
+    </section>
+   </main>
+
+{% endblock content %}

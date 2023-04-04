@@ -1,0 +1,53 @@
+{% load static %}
+
+<header>
+    <nav>
+        <div class="nav-center">
+            <!-- nav header -->
+            <div class="nav-header">
+                <a href="/">
+                    <img src="{% static './images/logo.png' %}" class="logo" alt="scam alert logo" />
+                </a>
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- links -->
+            <ul class="links ml-1">
+                <li>
+                    <a href="{% url 'base:home' %}">home</a>
+                </li>
+                <li class="add-mt">
+                    <a href="{% url 'scan:check-identity' %}">check identity</a>
+                </li>
+                <li class="add-mt">
+                    <a href="{% url 'scams:share_stories' %}">real stories shared</a>
+                </li>
+                <li class="add-mt">
+                    <a href="#">education</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="add-mt">
+                    <a href="{% url 'scams:my-reports' %}">My Stories</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="links flex">
+                {% if not request.user.is_authenticated %}
+                <li class="mr-3">
+                    <a href="{% url 'account:login_page' %}">
+                        <i class="fa-solid fa-user-pen"></i>
+                        <span>Sign in</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="btn make-text-white">
+                    <a href="{% url 'scams:share-your-story' %}">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        Share your story
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,209 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} Home {% endblock page_title %}
+{% block content %}
+<section>
+    <section class="container section-center flex margin-top-from-nav second-header-section">
+        <div class="first-div">
+            <img src="{% static 'images/home/PNG/strokes.png' %}" alt="strokes" class="strokes" />
+            <h1>
+                Use Scam Alert to
+                secure yourself &
+                others online
+            </h1>
+            {% include 'base/partials/flash_messages.html' %}
+            <p>
+                Awareness portal to alarm the public about a scammer, and to run a background check on someone,
+                company, website, or account number.
+            </p>
+            <div class="header-links">
+                <a href="{% url 'scams:share-your-story' %}" class="btn px-2" id="sys-btn">Share your story</a>
+                <a href="{% url 'scan:check-identity' %}" class="btn btn-outline px-2" id="ci-btn">Check Identity <i
+                        class="bi bi-arrow-up-right"></i></a>
+            </div>
+            <img src="{% static 'images/home/WebP/underline.webp' %}" alt="underline" class="underline" />
+            </div>
+            <div class="second-div">
+                <img src="{% static 'images/home/Images/Content1.png' %}" alt="checking for scam stories with scam alert"
+                    class="checking-for-scam-img" />
+            </div>
+        </section>
+        <img src="{% static 'images/auth/Rectangle-3.png' %}" alt="rectangle" class="rectangle" />
+    </section>
+    
+    <!-- MAIN SITE SECTION -->
+    <main class="container">
+        <!-- FIRST SECTION -->
+        <section class="main-first-section flex">
+            <div>
+                <h2>Sadly, over 1000+ people are getting scammed monthly</h2>
+                <p>
+                    People are losing millions of money to scammers, investing time & money
+                    into fake businesses everyday. Scam Alert is here to help reduce
+                    or totally eradicate scam in our society.
+                </p>
+            </div>
+            <img src="{% static 'images/home/PNG/content-scamalert.png' %}" alt="sad scam">
+        </section>
+    
+    
+        <!-- SECOND SECTION -->
+        <section class="main-second-section">
+            <h2>
+                Let's fight scammers & phishing site with Scam Alert
+            </h2>
+            <div>
+                <div class="info-content">
+                    <h3>Got scammed or about to get scammed? Alert the public through Scam Alert</h3>
+                    <p>
+                        Report a scammer, phishing website, social media profile, or phone number to the public and
+                        prtotected others from been a victim too, Scam Alert will automatically broadcast the story
+                        throughout social media to inform the public.
+                    </p>
+                    <a href="{% url 'scams:share-your-story' %}" class="btn">
+                        Report a scammer
+                        <span>
+                            <i class="fa-solid fa-right-long"></i>
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <img src="{% static 'images/home/Images/go-public.png' %}" alt="go public">
+                </div>
+            </div>
+        </section>
+    
+        <!-- THIRD SECTION -->
+        <section class="main-third-section flex">
+            <img src="{% static 'images/home/Images/scamalert.png' %}" alt="scam alert pressing phone">
+            <div>
+                <h3>Want to transact online? Run an identity check first</h3>
+                <p>
+                    With just account number, phone number, website URL, you can check if a person, company, or website
+                    you want to transacte with has been reported as scammer, Don't be the next victim, check identity
+                    first...
+                </p>
+                <a href="{% url 'scan:check-identity' %}" class="btn">
+                    Check identity
+                    <span>
+                        <i class="fa-solid fa-right-long"></i>
+                    </span>
+                </a>
+            </div>
+        </section>
+    
+        <!-- FOURTH SECTION -->
+        <section class="main-fourth-section">
+            <h2 class="pt-3">Read Scam stories shared by people, learn from it or give the victim an advice </h2>
+            <div class="report-feed">
+                {% for story in stories %}
+                <article class="card">
+                    <div class="profile-info-container">
+                        <a href="#" class="flex">
+                            <img 
+                                src="{{story.user.user_profile.get_image_url}}" 
+                                alt="{{story.user.user_profile.full_name}}" 
+                                style="border-radius:50%;"
+                            />
+                            <strong class="person-name">{{story.user.user_profile.full_name|truncatechars:12}}</strong>
+                        </a>
+                        <small class="moment-ago">
+                            <span class="dot"></span>
+                            Raised Alarm
+                            <span class="raised-alarm">{{story.date_reported|timesince}}</span>
+                            ago
+                        </small>
+                    </div>
+    
+                    <h3 class="mt-1">
+                        <a href="{{story.get_absolute_url}}">
+                            {{story.info_to_public|title|truncatewords:12}}
+                        </a>
+                    </h3>
+    
+                    <p class="sm__opac">
+                        {{story.describe_what_happened|title|truncatewords:32}}
+                    </p>
+    
+                    <hr>
+                    <div class="post-socials">
+                        <span>
+                            <i class="bi bi-chat-right-text-fill"></i>
+                            <span><span>2</span> comments</span>
+                        </span>
+                        <span>
+                            <i class="bi bi-share-fill"></i>
+                            <span><span>2k</span> shares</span>
+                        </span>
+                        <span>
+                            <i class="bi bi-bookmarks-fill" style="color: red;"></i>
+                            <span><span>200</span> following</span>
+                        </span>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <div class="flex mt-3">
+                <a href="#" class="btn view-reports">
+                    View more reports
+                    <i class="fa-solid fa-right-long"></i>
+                </a>
+            </div>
+        </section>
+    
+        <!-- BEGINS - FIFTH/SOCIAL MEDIA SECTION -->
+        <section class="main-fifth-section main-fourth-section mb-5">
+            <h2 class="pt-3">Follow us on social media to always get latest scam report</h2>
+            <p class="text-center mt-3">coming soon...</p>
+        </section>
+        <!-- ENDS - FIFTH/SOCIAL MEDIA SECTION -->
+        <!-- BEGINS - SIXTH/BLOG SECTION -->
+        <section class="six-fifth-section main-fourth-section">
+            <h2 class="pt-3 pb-2">Get latest tips, advises, and news on trending scams</h2>
+            <div class="flex">
+                <article>
+                    <img src="{% static 'images/blog/Image1.png' %}" alt="blog title">
+                    <h3>
+                        <a href="#">How the flying fish swiftly flew by the space station.</a>
+                    </h3>
+                    <p>
+                        Quis neque, eu et ipsum amet, vel et. Varius integer enim pellentesque ornare pharetra faucibs
+                        arcu. Mauris blandit egestas nibh.
+                    </p>
+                    <a href="#">Read more...</a>
+                </article>
+                <article>
+                    <img src="{% static 'images/blog/Image-11.png' %}" alt="blog title">
+                    <h3>
+                        <a href="#">How the flying fish swiftly flew by the space station.</a>
+                    </h3>
+                    <p>
+                        Quis neque, eu et ipsum amet, vel et. Varius integer enim pellentesque ornare pharetra faucibs
+                        arcu. Mauris blandit egestas nibh.
+                    </p>
+                    <a href="#">Read more...</a>
+                </article>
+                <article>
+                    <img src="{% static 'images/blog/Image-21.png' %}" alt="blog title">
+                    <h3>
+                        <a href="#">How the flying fish swiftly flew by the space station.</a>
+                    </h3>
+                    <p>
+                        Quis neque, eu et ipsum amet, vel et. Varius integer enim pellentesque ornare pharetra faucibs
+                        arcu. Mauris blandit egestas nibh.
+                    </p>
+                    <a href="#">Read more...</a>
+                </article>
+            </div>
+            <div class="view-more">
+                <a href="#" class="btn btn-outline px-2">
+                    View more
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </div>
+        </section>
+        <!-- ENDS - SIXTH/BLOG SECTION -->
+    </main>
+    <!-- END MAIN SITE SECTION -->
+{% endblock content %}

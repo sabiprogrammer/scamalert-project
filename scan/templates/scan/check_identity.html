@@ -1,0 +1,302 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} Verify Identity {% endblock page_title %}
+
+{% block content %}
+    <!-- MAIN SITE SECTION -->
+    <main class="check-identity-main pb-5">
+        <section class="py-5 shield-container shield-container--m">
+            <img src="{% static 'images/auth/vector.png' %}" alt="shield" class="shield">
+        </section>
+        <section>
+            <h1>Verify identity to avoid been scammed</h1>
+            <p>
+                Scan an identity to verify if a public awareness has been raised about the identity & be protected. from
+                been scammed.
+            </p>
+            {% include 'base/partials/flash_messages.html' %}
+            <section class="verify-identity-form-container mt-4" id="verify-identity-form-container">
+                <form id="check-identity-form" action="{% url 'scan:process-scan' %}" method="GET">
+                    <section class="form-btn p-1 pb-3">
+                        <button type="button" class="active mr-1" data-id="bank-detail-input-container">Bank
+                            detail</button>
+                        <button type="button" class="mr-1" data-id="fullname-input-container">Full name</button>
+                        <button type="button" class="mr-1" data-id="website-url-input-container">Website URL</button>
+                        <button type="button" class="mr-1" data-id="company-name-input-container">Company name</button>
+                        <button type="button" class="mr-1" data-id="phone-number-input-container">Phone number</button>
+                    </section>
+                    <section class="form-inputs p-1">
+                        <div class="inputs-container bank-details" id="bank-detail-input-container">
+                            <input type="text" name="bank-name" class="input-styles" placeholder="enter bank name" />
+                            <input type="text" name="account-number" class="input-styles" id="account-number" placeholder="enter account number" />
+                            <input type="hidden" name="search-bank" value="" class="hidden-input__cb" id="bank_hidden_input_field"/>
+                            <button class="btn px-3" id="bank-submit-btn">
+                                <i class="bi bi-upc-scan"></i>
+                                Verify
+                            </button>
+                        </div>
+                        <div class="inputs-container single-input-container" id="fullname-input-container">
+                            <input type="text" name="fullname" class="input-styles" placeholder="enter the person's fullname" />
+                            <input type="hidden" name="search-fullname" value="" class="hidden-input__cb"/>
+                            <button class="btn px-3" id="fullname-submit-btn">
+                                <i class="bi bi-upc-scan"></i>
+                                Verify
+                            </button>
+                        </div>
+                        <div class="inputs-container single-input-container" id="website-url-input-container">
+                            <input type="text" name="website" class="input-styles" placeholder="enter the website url" />
+                            <input type="hidden" name="search-website" value="" class="hidden-input__cb"/>
+                            <button class="btn px-3" id="website-submit-btn">
+                                <i class="bi bi-upc-scan"></i>
+                                Verify
+                            </button>
+                        </div>
+                        <div class="inputs-container single-input-container" id="company-name-input-container">
+                            <input type="text" name="company" class="input-styles" placeholder="enter the company name" />
+                            <input type="hidden" name="search-company" value="" class="hidden-input__cb"/>
+                            <button class="btn px-3" id="company-submit-btn">
+                                <i class="bi bi-upc-scan"></i>
+                                Verify
+                            </button>
+                        </div>
+                        <div class="inputs-container single-input-container" id="phone-number-input-container">
+                            <input type="text" name="phone" class="input-styles" placeholder="enter the phone number (eg: 081...)" />
+                            <input type="hidden" name="search-phone" value="" class="hidden-input__cb"/>
+                            <button class="btn px-3" id="ph-submit-btn">
+                                <i class="bi bi-upc-scan"></i>
+                                Verify
+                            </button>
+                        </div>
+                    </section>
+                </form>
+            </section>
+        </section>
+    </main>
+    <section class="container safeguard-section-container">
+        <h2>
+            Safeguard your transactions online
+            by first verifying identity
+        </h2>
+        <div class="show-mobile">
+            <img src="{% static 'images/home/Images/frame.png' %}" alt="verify the identity of a scammer" />
+        </div>
+        <section class="our-values-container">
+            <div>
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Verify names & business name</h3>
+                <p>
+                    Lets shared our experience and scammer or fake site details with others to protect others from been
+                    victimized by the
+                    same scammer or fake site.
+                </p>
+            </div>
+            <div>
+                <i class="fa-solid fa-phone"></i>
+                <h3>Verify phone number</h3>
+                <p>
+                    Scam Alert automatically share your story as you publish across several social media to alert the
+                    public about the
+                    scammer, fake site or phone number.
+                </p>
+            </div>
+            <div>
+                <i class="fa-solid fa-link"></i>
+                <h3>Verify Website or social URL</h3>
+                <p>
+                    With the scam story shared by victims, third parties, or witness, you can run an identity check with
+                    just phone number,
+                    name, bank details.
+                </p>
+            </div>
+            <div>
+                <i class="fa-solid fa-building-columns"></i>
+                <h3>Verify bank detail</h3>
+                <p>
+                    On Scam Alert you can get tips, guides, news on trending scams and fraudulent practices to educated
+                    yourself and ehance
+                    your knowledge.
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <section class="container what-we-do">
+        <div>
+            <h2>
+                Accurate identity result to spot a scammer or build trust
+            </h2>
+            <p>
+                After checking the detail against billions of reports submitted on Scam Alert, you will be provided with
+                a result page
+                showing the a public stat of detail you that inputted.
+
+                <br />
+                <br />
+                Compare the public analysis, spot the signs and protect yourself online. Don’t be the next victim.
+            </p>
+        </div>
+        <div>
+            <img class="card" src="{% static 'images/result/screenshot1.png' %}" alt="screenshot of scamalert" />
+        </div>
+    </section>
+
+    <section class="container what-we-do what-we-do2">
+        <div>
+            <img class="card" src="{% static 'images/result/screenshot2.png' %}" alt="screenshot of scamalert" />
+        </div>
+        <div>
+            <h2>
+                Read report and give your opinion or advise to victim </h2>
+            <p>
+                You can click on each report to read a report made by pblic and give your opinion or advise to victim.
+                Together we can
+                build a happy society by looking out for each other.
+            </p>
+        </div>
+    </section>
+    <!-- END MAIN SITE SECTION -->
+    {% endblock content %}
+
+    {% block scripts %}
+    <script>
+        // getting all inputs container
+        const allInputsContainer = [...document.querySelectorAll(".inputs-container")];
+
+        // getting all buttons
+        const btns = [...document.querySelectorAll(".form-btn button")];
+
+        // hiding all inputs except the first one
+        allInputsContainer.forEach((input, index, array) => {
+            if (index !== 0) {
+                input.style.display = 'none';
+            }
+        });
+
+        // making the buttons work
+        // 1. looping through all buttons
+        btns.forEach((btn, index, buttons) => {
+            btn.addEventListener("click", (e) => {
+                buttons.forEach(button => {
+                    // 2. removing the active class from unclicked buttons
+                    // and adding it to the clicked button
+                    if (button !== btn) {
+                        button.classList.remove("active");
+                    } else {
+                        button.classList.add("active");
+
+                        // 3. displaying the appropriate form input
+                        const currentBtnID = button.dataset.id;
+                        allInputsContainer.forEach(input => {
+                            if (input.getAttribute('id') !== currentBtnID) {
+                                input.style.display = 'none';
+                            } else {
+                                input.style.display = 'grid';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+        // validating individual buttons on submit
+        const submitBtns = [...document.querySelectorAll(".inputs-container button")];
+        submitBtns.forEach(btn => {
+            btn.addEventListener("click", e => {
+                const elementInput = btn.parentElement.querySelector("input");
+                if (!elementInput.value.trim()) {
+                    if(elementInput.name === 'bank-name'){
+                        const account_number_field = document.getElementById("account-number");
+                        if (!account_number_field.value.trim()){
+                           account_number_field.classList.add('error');
+                            displayInfoMessages(
+                                'warning',
+
+                                `
+                                <span>🤔</span>
+                                <p>Please either at least an account number or a bank name to search</p>
+                                <span>😒</span>
+                                `
+                            ); 
+                        }else{
+                            document.getElementById('bank_hidden_input_field').value = 'bank';
+                        }
+                    }else{
+                        elementInput.classList.add('error');
+                        displayInfoMessages(
+                            'warning',
+
+                            `
+                            <span>🤔</span>
+                            <p>Please ${elementInput.placeholder}</p>
+                            <span>😒</span>
+                            `
+                        );
+                        return false;
+                    }
+                    
+                }else{
+                    // getting the particular submit button that was clicked
+                    // adding a value to its closet hidden input in order to use the value to get...
+                    // ... which input was actually entered to be searchedfor...
+                    // ... by the user (whether bank, website, company, etc)
+                    const closestHiddenInput = btn.previousElementSibling;
+                    const closestDiv = btn.closest("div");
+                    closestHiddenInput.value = closestDiv.getAttribute('id').split("-")[0];
+                }
+            });
+        });
+        
+        
+        // validating the form
+        // keeping track of the last focus input
+        const inputs = [...document.querySelectorAll(".inputs-container input")];
+        
+        // getting last focus input
+        let lastFocusInput = "";
+        inputs.forEach(input => {
+            input.addEventListener("focus", e => {
+                lastFocusInput = input;
+            });
+        });
+        const formContainer = document.querySelector("form#check-identity-form");
+        formContainer.addEventListener("submit", e => {
+            e.preventDefault();
+            
+            
+            // checking that at least one input was filled
+            const inputCounter = [];
+            inputs.forEach(input => {
+                if (input.value.trim()) {
+                    inputCounter.push(1);
+                }
+            });
+            if (inputCounter.length <= 0) {
+                // displaying the appropriate error message
+                // based on the last focus input
+                if(lastFocusInput){
+                    lastFocusInput.classList.add('error');
+                    displayInfoMessages(
+                        'warning',
+
+                        `
+                    <span>🤔</span>
+                    <p>Please ${lastFocusInput.placeholder}</p>
+                    <span>😒</span>
+                `
+                    );
+                }
+                return false;
+            } else {
+                formContainer.submit();
+            }
+        });
+
+    </script>
+    {% endblock scripts %}
+
+</body>
+
+</html>

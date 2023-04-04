@@ -1,0 +1,112 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} {{user.user_profile.full_name | title}} {% endblock page_title %}
+
+{% block content %}
+{% include 'dashboard/partials/structure.html' %}
+<div>
+    <h4>Profile</h4>
+</div>
+<div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="list-options-container number5-container">
+            <div>
+                <label for="fullname">Your full name</label>
+                {{profile_form.full_name}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="gender">Gender</label>
+                {{profile_form.gender}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="age-range">Age range</label>
+                {{profile_form.age_range}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="phone-number">Phone Number</label>
+                {{profile_form.phone_number}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="country">Country</label>
+                {{profile_form.country}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                {{user_form.email}}
+                <br />
+                <small style="color: red;"></small>
+            </div>
+            <div>
+                <label for="password">Set new password</label>
+                <input type="password" name="password" id="password" />
+                <br />
+                <small style="color: red;"></small>
+            </div>
+
+            <div>
+                <label for="pic-upload-input">Profile picture</label>
+                {{profile_form.picture}}
+                <div class="show-uploaded-image-container">
+                    <img src="{{profile.picture.url}}" alt="uploaded image" />
+                </div>
+                <p class="change-picture">Change Picture</p>
+                <br />
+                <small style="color: red;"></small>
+            </div>
+        </div>
+
+        <p>
+            Basic information on data protection:
+            Scam Alert do not sell or give out your data to third party.
+            <a href="#" class="text-primary">More information</a>
+        </p>
+
+        <button class="btn mt-2 px-3 py-1 sm">Update profile</button>
+    </form>
+</div>
+<section class="mt-4">
+    <h3>Notification</h3>
+</section>
+</section>
+</section>
+</main>
+<!-- END MAIN SITE SECTION -->
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    // making the designed / custom button to trigger the click
+    // event of the hidden file input file
+    const fileInputField = document.getElementById("pic-upload-input");
+    const changePicBtn = document.querySelector(".change-picture");
+    const imgEl = document.querySelector(".show-uploaded-image-container img");
+
+    changePicBtn.addEventListener("click", () => {
+        fileInputField.click();
+    });
+
+    fileInputField.addEventListener("change", (e) => {
+        const file = e.currentTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', (e) => {
+                imgEl.setAttribute('src', e.currentTarget.result);
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+{% endblock scripts %}

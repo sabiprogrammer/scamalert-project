@@ -1,0 +1,413 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} Shared Stories {% endblock page_title %}
+
+{% block content %}
+    <!-- MAIN SITE SECTION -->
+    <main class="results-main">
+        <section>
+            <div class="flex space-between">
+                <div>
+                    <img src="{% static 'images/result/cloud1.png' %}" alt="cloud1" />
+                    <img src="{% static 'images/result/cloud2.png' %}" alt="cloud2" />
+                </div>
+                <div class="hide-mobile">
+                    <img src="{% static 'images/result/cloud3.png' %}" alt="cloud3" />
+                    <img src="{% static 'images/result/cloud4.png' %}" alt="cloud4" />
+                </div>
+            </div>
+            <div class="found-details-container">
+                <div>
+                    <p>Registered Users</p>
+                    <p><span>143</span> times</p>
+                </div>
+                <div>
+                    <p>Average Searches Per Day</p>
+                    <p><span>606</span></p>
+                </div>
+                <div>
+                    <p>Last Reported Case</p>
+                    <p>March, 2023</p>
+                </div>
+                <div>
+                    <p>Last reported</p>
+                    <p>June, 2022</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container main-aside-container">
+            <main class="mr-5">
+                <section>
+                    <h3 class="text-primary">
+                        <i class="bi bi-exclamation-octagon-fill"></i>
+                        Reports
+                    </h3>
+                    <p>
+                        Here are scam stories shared by individuals in order to alert the public. This is the power of
+                        the people against scams to protect each other.
+                    </p>
+                </section>
+                <section id='append-article'>
+                    {% for story in stories reversed %}
+                    <article class="found-person-reports-container mt-3">
+                        <div>
+                            <div>
+                                <a href="#" class="flex">
+                                    <img 
+                                        src="{{story.user.user_profile.get_image_url}}" 
+                                        alt="{{story.user.user_profile.full_name}} profile picture"
+                                        style="border-radius:50%;" 
+                                    />
+                                    <strong class="reporter-name">{{story.user.user_profile.full_name|truncatechars:12}}</strong>
+                                </a>
+                                <small class="moment-ago">
+                                    <span class="dot"></span>
+                                    Raised Alarm
+                                    <span class="raised-alarm">{{story.date_reported|timesince}}</span>
+                                    ago
+                                </small>
+                            </div>
+                            
+                            <h3 class="mt-1">
+                                <a href="{{story.get_absolute_url}}">
+                                    {{story.info_to_public|title|truncatewords:15}}
+                                </a>
+                            </h3>
+                            
+                            <p class="sm__opac">
+                                {{story.describe_what_happened|title|truncatewords:32}}
+                            </p>
+                            
+                            <div class="post-socials pb-2">
+                                <span>
+                                    <i class="bi bi-chat-right-text-fill"></i>
+                                    <span><span>2</span> comments</span>
+                                </span>
+                                <span>
+                                    <i class="bi bi-share-fill"></i>
+                                    <span><span>2k</span> shares</span>
+                                </span>
+                                <span>
+                                    <i class="bi bi-bookmarks-fill"></i>
+                                    <span><span>200</span> following</span>
+                                </span>
+                            </div>
+                            
+                            <hr/>
+                        </div>
+                        <div class="scammer-img-container">
+                            <img src="{{story.get_scammer_pic}}" alt="{{story.scammer_fullname_or_website}}"/>
+                        </div>
+                    </article>
+                    {% endfor %}
+                    
+                    <div class="text-center mt-3" id='load-more-btn'>
+                        <a href="#" class="btn">
+                            <i class="fa-solid fa-rotate" id="hide-rotate-icon"></i>
+                            <span>Load more report</span>
+                            {% comment %} <span class="make-circle">3</span> {% endcomment %}
+                        </a>
+                    </div>
+                </section>
+            </main>
+            <aside>
+                <div>
+                    <img class="aside-img" src="{% static 'images/result/image24.png' %}" alt="man with phone surprised"/>
+                </div>
+                <section class="mt-2">
+                    <h3>
+                        <i class="bi bi-journal-bookmark-fill" style="color: red;"></i>
+                        Top Stories
+                    </h3>
+                    <p>
+                        See some top stories on scam alert
+                    </p>
+                    <div class="flex space-between my-1">
+                        <span>Name(s):</span>
+                        <span>Mary Williamson</span>
+                    </div>
+                </section>
+
+
+                {% comment %} 
+                <section class="mt-3">
+                    <h3>
+                        <i class="fa-solid fa-hashtag" style="color: red;"></i>
+                        Other related details
+                    </h3>
+                    <p>
+                        Here are other details we have about this person
+                    </p>
+                    <div class="my-1">
+                        <span><i class="bi bi-instagram"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-tiktok"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-twitter"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-linkedin"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                </section> 
+                {% endcomment %}
+
+                <section class="tips-container">
+                    <div>
+                        <i class="fa-regular fa-lightbulb" style="color: red; font-size: 28px;"></i>
+                        <h3>Follow below tips to avoid been scammed online</h3>
+                    </div>
+                    <div class="my-1">
+                        <i class="fa-regular fa-circle-check" style="background-color:green; color:white; border-radius: 50%; font-size: 18px;"></i>
+                        <a href="#">
+                            How to transact online using Escrow service & be protected
+                        </a>
+                    </div>
+                    <div class="my-1">
+                        <i class="fa-regular fa-circle-check" style="background-color:green; color:white; border-radius: 50%; font-size: 18px;"></i>
+                        <a href="#">
+                            How to identify a fake website before buying online                        
+                        </a>
+                    </div>
+                    <div class="my-1">
+                        <i class="fa-regular fa-circle-check" style="background-color:green; color:white; border-radius: 50%; font-size: 18px;"></i>
+                        <a href="#">
+                            How to identify fake instgram sellers                        
+                        </a>
+                    </div>
+                    <div class="my-1">
+                        <i class="fa-regular fa-circle-check" style="background-color:green; color:white; border-radius: 50%; font-size: 18px;"></i>
+                        <a href="#">
+                            Fling to take note of to know a scammer                    
+                        </a>
+                    </div>
+                </section>
+            </aside>
+        </section>
+    </main>
+    <!-- END MAIN SITE SECTION -->
+
+    <!-- START FEEDBACK SECTION -->
+    <section class="feedback-survery">
+        <h3>Did you find this information useful?</h3>
+        <div class="satisfaction-response">
+            <div class="mr-2">
+                <a href="#">
+                    <span>123</span>
+                    <strong>😇</strong>
+                    <span>Yes</span>
+                </a>
+            </div>
+            <div>
+                <a href="#">
+                    <span>4</span>
+                    <strong>😔</strong>
+                    <span>No</span>
+                </a>
+            </div>
+        </div>
+        <h3 class="text-primary">
+            Follow us on social media
+        </h3>
+        <p>
+            We share stories reported on social media to get inform masses faster
+        </p>
+        <div class="social-icons-container">
+            <a href="#">
+                <i class="fa-brands fa-linkedin md"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-square-twitter md px-2"></i>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-facebook md"></i>
+            </a>
+        </div>
+    </section>
+    <!-- END FEEDBACK SECTION -->
+{% endblock content %}
+{% block scripts %}
+
+<script>
+    const loadMoreBtn = document.getElementById("load-more-btn");
+    const appendArticle = document.getElementById("append-article");
+    
+
+    let getAbsoluteUrl = (function() {
+        let a;
+        return function(url) {
+            if(!a) a = document.createElement('a');
+            a.href = url;
+
+            return a.href;
+        };
+    })();
+
+    function slugifyField(string){
+        return string
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+    }
+
+    function toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+    }
+
+    // get csrf token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    let postCount = 1;
+
+    loadMoreBtn.addEventListener("click", (e)=>{
+        e.preventDefault();
+
+        loadMoreBtn.style.pointerEvents = "none";
+        loadMoreBtn.querySelector("span").innerText = "loading..."
+        loadMoreBtn.querySelector("a").style.backgroundColor = "grey";
+        
+        // getting the data from django
+        fetch("{% url 'scams:share_stories' %}",
+            {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-Requested-With": "XMLHttpRequest",
+                    "HTTP_X_REQUESTED_WITH": "XMLHttpRequest",
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({postCount})
+            })
+            .then(response=>response.json())
+            .then(data=>{
+
+               
+                postCount = postCount + 2;
+
+                let stories = JSON.parse(data['stories']);
+                
+                // checking if some stories were received from the database
+                if (stories.length > 0){
+                    //appending the data to the DOM
+                    for(let i = 0; i < stories.length; i++){
+                        let story = stories[i]['fields'];
+                        let modifiedImg = story.modified_img || "https://img.freepik.com/free-icon/user_318-804790.jpg";
+                        let userPic = story.modified_user_pic || "https://img.freepik.com/free-icon/user_318-804790.jpg";
+                        let scammerName = story.scammer_fullname_or_website;
+                        let infoToPublic = story.info_to_public.substring(0, 70);
+                        let whatHappened = story.describe_what_happened.substring(0, 200);
+                        let username = story.modified_username;
+
+                        let tempDatePosted = new Date(story.date_reported);
+                        let datePosted = `${tempDatePosted.getDay()+1}/${tempDatePosted.getFullYear()}`;
+                        
+                        let storyPK = stories[i].pk;
+                        let slugifiedHead = slugifyField(story.info_to_public.substring(0, 100));
+                        let tempLink = `/scams/story/${slugifiedHead}/${storyPK}`;
+                        let storyLink = `${getAbsoluteUrl(tempLink)}`;
+
+                        let articleTag = document.createElement("article");
+                        articleTag.style.display = 'flex';
+                        articleTag.style.marginTop = '2em';
+
+                        let articleContent = `
+                            <div>
+                                <div style="display:flex; gap:1em;">
+                                    <a href="#" class="flex">
+                                        <img
+                                            src="${userPic}" 
+                                            alt="${username} profile picture"
+                                            style="border-radius:50%; width:2.5em; height:2.5em;" 
+                                        />
+                                        <strong class="reporter-name" style="color:grey; font-size:12px; padding-left:5px;">${username.substring(0, 12)}</strong>
+                                    </a>
+                                    <small class="moment-ago">
+                                        <span class="dot"></span>
+                                        Raised Alarm on 
+                                        <span class="raised-alarm">${datePosted}</span>
+                                    </small>
+                                </div>
+                                
+                                <h3 class="mt-1" style="text-decoration:underline;">
+                                    <a href="${storyLink}">
+                                        {{story.info_to_public|title|truncatewords:15}}
+                                        ${toTitleCase(infoToPublic)}...
+                                    </a>
+                                </h3>
+                                
+                                <p class="sm__opac">
+                                    {{story.describe_what_happened|title|truncatewords:32}}
+                                    ${toTitleCase(whatHappened)}...
+                                </p>
+                                
+                                <div class="post-socials pb-2">
+                                    <span>
+                                        <i class="bi bi-chat-right-text-fill"></i>
+                                        <span><span>2</span> comments</span>
+                                    </span>
+                                    <span>
+                                        <i class="bi bi-share-fill"></i>
+                                        <span><span>2k</span> shares</span>
+                                    </span>
+                                    <span>
+                                        <i class="bi bi-bookmarks-fill"></i>
+                                        <span><span>200</span> following</span>
+                                    </span>
+                                </div>
+                                
+                                <hr/>
+                            </div>
+                            <div class="scammer-img-container">
+                                <img src="${modifiedImg}" alt="${modifiedImg}"/>
+                            </div>
+                        `;
+                        articleTag.innerHTML = articleContent;
+                        appendArticle.insertBefore(articleTag, loadMoreBtn);
+                        
+
+                        loadMoreBtn.style.pointerEvents = "all";
+                        loadMoreBtn.querySelector("span").innerText = "load more"
+                        loadMoreBtn.querySelector("a").style.backgroundColor = "#F2022A";
+                        loadMoreBtn.querySelector("a").style.color = "#fff";
+                    }
+                }else{
+                    {% comment %} loadMoreBtn.style.display = "none"; {% endcomment %}
+                    loadMoreBtn.style.pointerEvents = "none";
+                    loadMoreBtn.querySelector("span").innerText = "no more stories"
+                    loadMoreBtn.querySelector("a").style.backgroundColor = "grey";
+
+                    document.getElementById("hide-rotate-icon").style.display = 'none';
+                }
+            });
+    });
+</script>
+{% endblock scripts %}

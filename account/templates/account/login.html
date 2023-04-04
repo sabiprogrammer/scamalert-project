@@ -1,0 +1,46 @@
+{% extends 'account/account_base.html' %}
+{% block title %} Log in {% endblock title %}
+
+{% block content %}
+    <section>
+        {% include 'base/partials/flash_messages.html' %}
+
+        <h1>Login to account</h1>
+        <p>
+            Welcome back, kindly provide your login details to log back in to your account
+        </p>
+        <article>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="list-options-container number5-container">
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" value="{{email}}" required />
+                        <br />
+                        <small style="color: red;"></small>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required />
+                        <br />
+                        <small style="color: red;"></small>
+                    </div>
+                </div>
+    
+                <!-- accept agreement -->
+                <div class="mb-3">
+                    <input type="checkbox" name="remember-me" id="remember-me"/>
+                    <label for="remember-me">
+                        Remember me
+                    </label>
+                </div>
+    
+                <button class="btn btn-block mt-3" id="create_account_btn">Login</button>
+                <p class="text-center mt-2">
+                    Forgot your password?
+                    <a href="#" class="text-primary">Reset Here</a>
+                </p>
+            </form>
+        </article>
+    </section>
+{% endblock content %}

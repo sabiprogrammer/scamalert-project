@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock title %} | Scam Alert</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo3.png' %}">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- bootstrap icons cdn -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+        integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- css styles link -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+    <section class="create-account-container">
+        <main class="create-account-main mt-2">
+            <header class="flex space-between container">
+                <div>
+                    <a href="/">
+                        <img src="{% static 'images/logo.png' %}" alt="scam alert image" />
+                    </a>
+                </div>
+                {% if "register" in request.build_absolute_uri  %}
+                <div class="flex">
+                    <p>Have an account?</p>
+                    <a href="{% url 'account:login_page' %}" class="text-primary pl-1">Log in here</a>
+                </div>
+                {% else %}
+                <div class="flex">
+                    <p>Need an account?</p>
+                    <a href="{% url 'account:register' %}" class="text-primary pl-1">Sign up here</a>
+                </div>
+                {% endif %}
+            </header>
+        
+
+            {% block content %}
+            {% endblock content %}
+
+
+            <section class="flex mt-5">
+                <p style="margin-bottom: 0;">Having trouble?</p>
+                <a href="#" class="ml-1 text-primary">Get Help</a>
+            </section>
+        </main>
+        <aside>
+            <div>
+                <h2>
+                    Let's work together as a community to reduce scam
+                </h2>
+                <p>
+                    Over 2000 Nigerians are scammed by individual, business, website online, let's join hands with the
+                    others who have
+                    reported a scam to prevent more victims.
+                </p>
+                <div class="hr mb-5">
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+            <img src="{% static 'images/auth/heart.png' %}" alt="love" />
+            <img src="{% static 'images/auth/rectangle.png' %}" alt="rect" />
+            <img src="{% static 'images/auth/Rectangle-3.png' %}" alt="shield" />
+            <img src="{% static 'images/auth/Rectangle-1.png' %}" alt="star" />
+            <img id="bottom" src="{% static 'images/auth/Rectangle-2.png' %}" alt="double star" />
+            <img class="bigger" src="{% static 'images/auth/young-man-in casual-clothes sitting-on-the floor-with phone.png' %}"
+                alt="young man in casual clothes sitting on the floor with phone" />
+        </aside>
+    </section>
+
+    <!-- START - POP UP INFO/ALERT MESSAGE -->
+    <section class="popup-message">
+        <div>
+
+        </div>
+    </section>
+    <!-- END - POP UP INFO/ALERT MESSAGE -->
+
+    <!-- <script src="./js/main.js"></script> -->
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+
+</html>

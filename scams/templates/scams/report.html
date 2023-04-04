@@ -1,0 +1,540 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} Share your scam story {% endblock page_title %}
+
+{% block content %}
+<!-- MAIN SITE SECTION -->
+<main class="pt-4 reports-main new pb-5">
+    <section class="pt-5 pb-5 shield-container">
+        <img src="./images/auth/vector.png" alt="shield" class="shield">
+        <h1>Share your story</h1>
+        <p>
+            Please share as much as you know. The details share would help the public to understand the strength of
+            the scam and beware of it.
+        </p>
+        <div class="flex steps-container">
+            <div class="step step1 active">
+                <span>1</span>
+                <p>Basic questions</p>
+            </div>
+            <div class="step step2">
+                <span>2</span>
+                <p>Scam report</p>
+            </div>
+            <div class="step step3">
+                <span>3</span>
+                <p>Done</p>
+            </div>
+        </div>
+    </section>
+    <section class="container card">
+        {% include 'base/partials/flash_messages.html' %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <section class="first-form-section">
+                <article>
+                    <div><strong>1</strong></div>
+                    <div>
+                        <h3>Please select the option that best describes how you are related to the story you are
+                            about to share</h3>
+                        <h5 class="mt-1">I am...</h5>
+                        {{form.is_victim}}
+                    </div>
+                </article>
+                <article>
+                    <div><strong>2</strong></div>
+                    <div>
+                        <h3>Do you wish to show your profile or share the story as anonymous?</h3>
+                        {{form.is_anonymous}}
+                    </div>
+                </article>
+                <article>
+                    <div><strong>3</strong></div>
+                    <div>
+                        <h3>Who or what are you reporting?</h3>
+                        {{form.who_are_you_reporting}}
+
+                    </div>
+                </article>
+                <article>
+                    <div><strong>4</strong></div>
+                    <div>
+                        <h3>Which Information do you have on scammer or the fake website?</h3>
+                        {{form.which_information_do_you_have}}
+                    </div>
+                </article>
+                <div class="container">
+                    <button type="button" class="btn px-2 proceed-btn">
+                        Proceed
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+            <section class="second-form-section">
+                <article>
+                    <div><strong>5</strong></div>
+                    <div>
+                        <h3>Provide those information you have on the scammer or fake website.</h3>
+                        <div class="list-options-container number5-container">
+                            <div>
+                                <label for="id_scammer_fullname_or_website">Full name of scammer or website</label>
+                                {{form.scammer_fullname_or_website}}
+                            </div>
+                            <div>
+                                <label for="scammer-gender">Gender</label>
+                                {{form.scammer_gender}}
+                            </div>
+                            <div>
+                                <label for="scammer-age-range">Age range</label>
+                                {{form.scammer_age_range}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_phone_number">Phone Number</label>
+                                {{form.scammer_phone_number}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_bank_name">Bank name</label>
+                                {{form.scammer_bank_name}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_account_number">Account number</label>
+                                {{form.scammer_account_number}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_othernames_nickname">Other names/nickname</label>
+                                {{form.scammer_othernames_nickname}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_profession">Profession</label>
+                                {{form.scammer_profession}}
+                            </div>
+                            <div>
+                                <label for="id_scammer_website_or_group_link">Website, forum, or online group
+                                    link</label>
+                                {{form.scammer_website_or_group_link}}
+                            </div>
+                            <section class="picture-upload-container" style="display: block;">
+                                <label for="pic">Profile picture</label>
+                                {{form.scammer_profile_pic}}
+                                <div class="input-upload-container">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <p>Upload</p>
+                                </div>
+                                <div class="show-uploaded-image-container">
+                                    <img src="" alt="uploaded image" />
+                                </div>
+                                <a class="text-primary change-img-link">change image</a>
+                            </section>
+                        </div>
+                    </div>
+                </article>
+                <article>
+                    <div><strong>6</strong></div>
+                    <div>
+                        <h3>Describe what happened</h3>
+                        <p>
+                            Please explain how the incident happened to make the public understand why they need to
+                            beware of the scammer, fake
+                            site, or phone number
+                        </p>
+                        {{form.describe_what_happened}}
+                    </div>
+                </article>
+                <article class="article7">
+                    <div><strong>7</strong></div>
+                    <div>
+                        <h3>Upload evidence (if any)</h3>
+                        <p>
+                            If you have evidence, you can include the image or screenshot too
+                        </p>
+                        <section class="picture-upload-container" id="upload-container">
+                            <div id="pic-div-con">
+                                <!-- <div class="show-uploaded-image-container show-uploaded-image-container__modifier">
+                                        <img src="./images/result/image24.png" alt="uploaded image" />
+                                        <a class="text-primary">remove image</a>
+                                    </div> -->
+                            </div>
+                            {{form.scam_evidence}}
+                            <div class="input-upload-container upload-container__modifier active">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Upload</p>
+                            </div>
+                            <input type="file" name="evidence2" class="evidenceInputs" id="evidence2" hidden />
+                            <div class="input-upload-container upload-container__modifier">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Upload</p>
+                            </div>
+                            <input type="file" name="evidence3" class="evidenceInputs" id="evidence3" hidden />
+                            <div class="input-upload-container upload-container__modifier">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Upload</p>
+                            </div>
+                            <input type="file" name="evidence4" class="evidenceInputs" id="evidence4" hidden />
+                            <div class="input-upload-container upload-container__modifier">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Upload</p>
+                            </div>
+                            <input type="file" name="evidence5" class="evidenceInputs" id="evidence5" hidden />
+                            <div class="input-upload-container upload-container__modifier">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Upload</p>
+                            </div>
+                        </section>
+                    </div>
+                </article>
+                <article>
+                    <div><strong>8</strong></div>
+                    <div>
+                        <h3>What loss do you suffer?</h3>
+                        {{form.loss_suffered}}
+                    </div>
+                </article>
+                <article>
+                    <div><strong>9</strong></div>
+                    <div>
+                        <h3>What information do you want to pass to the public?</h3>
+                        <p>
+                            eg. Marykel instagram makeup seller is a scammer, beware of her.
+                        </p>
+                        {{form.info_to_public}}
+
+                    </div>
+                </article>
+                <article>
+                    <div><strong>10</strong></div>
+                    <div>
+                        <h3>Digital user-agreement</h3>
+                        <div class="consent-container">
+                            {{form.agreement}}
+                            <label for="id_agreement">
+                                I affirm that the information I provided is true and accurate to the best of my
+                                knowledge. I understand that providing
+                                false information could make me subject to fine, imprisonment, or both. (Title 18,
+                                Nigeria law. Code, Section 1001.).
+                            </label>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <div class="container second-form-section-btn">
+                <button class="btn px-2">
+                    Submit
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </form>
+    </section>
+</main>
+<!-- END MAIN SITE SECTION -->
+
+<!-- START - INITIAL POP UP -->
+<section class="card initial-pop-up-container p-3">
+    {% include 'base/partials/flash_messages.html' %}
+
+    <h3 class="md pb-2">
+        You are about to report a scam, kindly read the below notice
+    </h3>
+    <p>
+        We appreciate you for contribuating to protect other citizens by sharing scam story & scammer details with
+        the public.
+
+        <br />
+        <br />
+        Prior to reporting a scam through Scam Alert, please be assured that your personal information would NOT be
+        shared with
+        any third party if you wish not to disclose your identity as stated in our privacy policy.
+    </p>
+    <div class="mt-3">
+        <h3>User Agreement</h3>
+        <div class="consent-container">
+            <form action="#">
+                <input type="checkbox" name="user-agreement" id="user-agreement">
+            </form>
+            <label for="user-agreement">
+                I understand that I am not allow to use Scam Alert for any other motive aside lnforming the
+                public know about a scammer,
+                fake site, fake social media seller and scammer’s phone number.
+            </label>
+        </div>
+    </div>
+    <div class="container mt-3 flex space-between agreement-btn-container">
+        <button type="button" class="btn px-2 not-agreed">
+            Proceed
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button type="button" class="btn px-2 go-back">
+            Go back
+        </button>
+    </div>
+</section>
+<!-- END - INITIAL POP UP -->
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script>
+    const userAgreement = document.getElementById("user-agreement");
+    const btnContainer = document.querySelector(".agreement-btn-container");
+    const firstBtnChild = btnContainer.querySelector("button:first-child");
+    const lastBtnChild = btnContainer.querySelector("button:last-child");
+    const reportsMainContainer = document.querySelector(".reports-main");
+    const popopContainer = document.querySelector(".initial-pop-up-container");
+    const backBtn = document.querySelector("button.go-back");
+    const proceedBtn = document.querySelector(".first-form-section .proceed-btn");
+
+    const secondFormSection = document.querySelector(".second-form-section");
+    const secondFormSectionBtn = document.querySelector(".second-form-section-btn");
+
+    // hiding the second form section
+    secondFormSection.style.display = 'none';
+    secondFormSectionBtn.style.display = 'none';
+
+    // to activate or deactive the proceed button if the user ckecks agree or not
+    userAgreement.addEventListener("input", (e) => {
+        firstBtnChild.classList.toggle("not-agreed");
+        lastBtnChild.classList.toggle("not-agreed");
+    });
+
+    // allow the user access to fill a report once they've agreed
+    firstBtnChild.addEventListener("click", (e) => {
+        if (userAgreement.checked) {
+            reportsMainContainer.classList.remove("new");
+            popopContainer.style.transform = 'translateX(-2000px)';
+
+            // making sure the pop up completely leaves the DOM
+            /*
+            setTimeout(() => {
+                popopContainer.style.display = 'none';
+            }, 4000);
+            */
+
+        } else {
+            alert("Please read and agree to the terms stated");
+        }
+    });
+
+    // going back to the previous page
+    backBtn.addEventListener("click", () => {
+        history.back();
+    });
+
+    // move to the next (second) form section
+    let flag = [];
+    proceedBtn.addEventListener("click", () => {
+        // get all pre-filled form fields
+        const allFirstQuestionsInput = [...document.getElementsByName("is_victim")];
+        const allSecondQuestionsInput = [...document.getElementsByName("is_anonymous")];
+        const allThirdQuestionsInput = [...document.getElementsByName("who_are_you_reporting")];
+        const allFourthQuestionsInput = [...document.getElementsByName("which_information_do_you_have")];
+
+        // making sure an option is selected from the first question
+        validateQuestionSection(allFirstQuestionsInput);
+        validateQuestionSection(allSecondQuestionsInput);
+        validateQuestionSection(allThirdQuestionsInput);
+        validateQuestionSection(allFourthQuestionsInput);
+
+        if (flag.length < 4) {
+            // show pop and do nothing if all fields are not selected
+            displayInfoMessages(
+                'danger',
+
+                `
+                        <span>🤔</span>
+                        <p>You're have not answered some questions</p>
+                        <span>😒</span>
+                    `
+            );
+            flag = [];
+            return false;
+        } else {
+            // take user to top
+            scroll(0, 0);
+
+            // allow user see next page if all fields are selected
+            // updating the progress bar
+            document.querySelectorAll(".steps-container > div")[1]
+                .classList.add("active");
+
+            // showing the second form section
+            secondFormSection.style.display = 'initial';
+            secondFormSectionBtn.style.display = 'initial';
+
+            // hiding the first form section
+            document.querySelector(".first-form-section").style.display = 'none';
+            // secondFormSectionBtn.style.display = 'none';
+
+        }
+    });
+
+
+    // submitting the form (DELETE CODE)
+    // const submitBtn = secondFormSectionBtn.querySelector("button");
+    // submitBtn.addEventListener("click", () => {
+    // go to success page (remove later - when backend ready)
+    // window.location.href = "report_success.html";
+    // });
+
+    function validateQuestionSection (section) {
+        for (let item of section) {
+            if (item.checked) {
+                flag.push(1);
+                break;
+            }
+        }
+    }
+
+
+
+
+    // uploading image functionality
+    const picUploadInput = document.getElementById("pic-upload-input");
+    const profilePictureContainer = document.querySelector(".picture-upload-container");
+    const changeImgLink = profilePictureContainer.querySelector(".change-img-link");
+    const uploadedImgContainer = profilePictureContainer.querySelector(".show-uploaded-image-container");
+    const inputUploadContainer = profilePictureContainer.querySelector(".input-upload-container");
+
+    changeImgLink.style.display = 'none';
+    uploadedImgContainer.style.display = 'none';
+
+
+    // making the designed / custom button to trigger the click
+    // even of the hidden file input file
+    inputUploadContainer.addEventListener("click", () => {
+        picUploadInput.click();
+    });
+
+    picUploadInput.addEventListener("change", (e) => {
+        const file = e.currentTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', (e) => {
+                changeImgLink.style.display = null;
+                uploadedImgContainer.style.display = null;
+                inputUploadContainer.style.display = 'none';
+                uploadedImgContainer.querySelector("img")
+                    .setAttribute('src', e.currentTarget.result);
+            });
+
+            reader.readAsDataURL(file);
+        }
+    });
+    // ability to change image
+    changeImgLink.addEventListener('click', () => {
+        inputUploadContainer.style.display = null;
+        changeImgLink.style.display = 'none';
+        uploadedImgContainer.style.display = 'none';
+        picUploadInput.click();
+    });
+
+
+
+
+    // upload evidence functionality
+    let allClicked = false;
+    let nextEl = true;
+
+    const clickBtnContainers = [...document.querySelectorAll(".upload-container__modifier")];
+    const firstBtnContainer = clickBtnContainers[0];
+    const secondBtnContainer = clickBtnContainers[1];
+    const thirdBtnContainer = clickBtnContainers[2];
+    const fourthBtnContainer = clickBtnContainers[3];
+    const fifthBtnContainer = clickBtnContainers[4];
+    const evidence1 = document.getElementById("evidence1");
+    const evidence2 = document.getElementById("evidence2");
+    const evidence3 = document.getElementById("evidence3");
+    const evidence4 = document.getElementById("evidence4");
+    const evidence5 = document.getElementById("evidence5");
+
+    function doClick (main, clickInp, next) {
+        clickInp.click();
+        main.classList.remove("active");
+        if (next && nextEl) {
+            next.classList.add("active");
+        } else {
+            checkInputAvailability();
+        }
+    }
+
+    firstBtnContainer.addEventListener("click", () => {
+        doClick(firstBtnContainer, evidence1, secondBtnContainer);
+    });
+    secondBtnContainer.addEventListener("click", () => {
+        doClick(secondBtnContainer, evidence2, thirdBtnContainer);
+    });
+    thirdBtnContainer.addEventListener("click", () => {
+        doClick(thirdBtnContainer, evidence3, fourthBtnContainer);
+    });
+    fourthBtnContainer.addEventListener("click", () => {
+        doClick(fourthBtnContainer, evidence4, fifthBtnContainer);
+    });
+    fifthBtnContainer.addEventListener("click", () => {
+        doClick(fifthBtnContainer, evidence5, false);
+
+        // check if an image was removed (make space for it to be added again)
+        checkInputAvailability();
+    });
+
+    function checkInputAvailability () {
+        nextEl = false;
+        if (tempAdded.length > 0) {
+            tempAdded[0].nextElementSibling.classList.add("active");
+            tempAdded.splice(0, 1);
+        }
+    }
+
+    // processing the click event
+    const pixPreviewContainer = document.getElementById("pic-div-con");
+    const evidenceInputs = [...document.getElementsByClassName("evidenceInputs")];
+    evidenceInputs.forEach(input => {
+        input.addEventListener("change", (e) => {
+            const file = e.currentTarget.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', (e) => {
+                    // creating the image preview container/content
+                    const newDiv = document.createElement("div");
+                    newDiv.classList.add("show-uploaded-image-container");
+                    newDiv.classList.add("show-uploaded-image-container__modifier");
+                    const imagePreview = `
+                                    <img src="${e.currentTarget.result}" alt="uploaded image" />
+                                    <span class="text-primary remove-preview-image" data-id=${input.getAttribute("id")} onclick="removePreview(this);">remove image</span>
+                                `;
+
+                    newDiv.innerHTML = imagePreview
+
+                    // adding the preview to the document
+                    pixPreviewContainer.appendChild(newDiv);
+                });
+
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
+    let tempAdded = [];
+    // processing the remove image preview link click
+    function removePreview (el) {
+        // removing the preview from the DOM
+        el.parentElement.remove();
+
+
+        // removing the originally selected image from the input tag
+        // this is to make sure it does not send to the backend
+        document.getElementById(el.dataset.id).value = null;
+
+        // marking the input as available once more
+        const nowAvailable = document.getElementById(el.dataset.id);
+
+        tempAdded.push(nowAvailable);
+
+        const stillExist = document.querySelector("div.upload-container__modifier.active");
+        if (!stillExist && tempAdded.length > 0) {
+            checkInputAvailability();
+        }
+    }
+</script>
+{% endblock scripts %}

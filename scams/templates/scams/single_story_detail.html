@@ -1,0 +1,210 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %} {{story.user.user_profile.full_name}}'s story {% endblock page_title %}
+{% block content %}
+    <!-- MAIN SITE SECTION -->
+    <main class="pb-5 header-margin-bottom container">
+        <div class="mb-2">
+            <a href="#" class="black-color" onclick="history.back();">
+                <i class="fa-solid fa-angle-left"></i>
+                back
+            </a>
+        </div>
+        <section class="primary-page-container">
+            <main>
+                <section class="reporter-info-container">
+                    <div>
+                        <img 
+                            src="{{story.user.user_profile.get_image_url}}" 
+                            alt="{{story.user.user_profile.full_name}}" 
+                            style="border-radius:50%;"
+                        />
+                        <div>
+                            <h4>{{story.user.user_profile.full_name}}</h4>
+                            <p>Relation: <span>{{story.is_victim}}</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <small class="moment-ago">
+                            <span class="dot"></span>
+                            Raised Alarm
+                            <span class="raised-alarm">{{story.date_reported|timesince}}</span>
+                            ago
+                        </small>
+                    </div>
+                </section>
+                <h1 class="story-head">
+                    {{story.info_to_public|title}}
+                </h1>
+
+                <small class="sm__opac">Here is what happed...</small>
+                <br/>
+                
+                <p>
+                    {{story.describe_what_happened|linebreaks}}
+                </p>
+                <section class="evidences-container">
+                    <br/>
+                    
+                    <h3>Evidences</h3>
+                    <div>
+                        {% if story.scam_evidence %}
+                            <img src="{{story.get_scam_evidence}}" alt="evidence" />
+                        {% else %}
+                            <p class="sm__opac">None was provided</p>
+                        {% endif %}
+                    </div>
+                </section>
+                <section class="my-3">
+                    <h3>Lost property</h3>
+                    {% if loss_suffered %}
+                        <ul style="list-style-type:square;">
+                            {% for item in loss_suffered %}
+                                <li>{{item}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </section>
+
+                <hr />
+
+                <div class="post-socials story-page-post-socials">
+                    <span>
+                        <i class="fa-solid fa-hands"></i>
+                        <span><span>2</span> clap</span>
+                    </span>
+                    <span>
+                        <i class="bi bi-chat-right-text-fill"></i>
+                        <span><span>2</span> comments</span>
+                    </span>
+                    <span>
+                        <i class="bi bi-share-fill"></i>
+                        <span><span>2k</span> shares</span>
+                    </span>
+                    <span>
+                        <i class="bi bi-bookmarks-fill" style="color: red;"></i>
+                        <span><span>200</span> following</span>
+                    </span>
+                </div>
+
+                <section>
+                    <div class="text-center">
+                        <p>Follow story up to read peoples opionin about is scam awareness</p>
+                        <h3>Help share to create further awareness to the public</h3>
+                        <div class="help-share-sm">
+                            <span>Shares</span>
+                            <a href="#">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="mt-4">
+                        Comment how you feel about this incident and what you thought the victim should do next.
+                    </p>
+                    <button type="button" class="btn btn-block sm mb-2">
+                        Comment your opinion
+                    </button>
+
+                    <hr />
+
+                    <h4 class="mt-3">
+                        0 Public opinion
+                    </h4>
+                </section>
+            </main>
+            <aside class="reported-person">
+                <div>
+                    <img src="{{story.get_scammer_pic}}" alt="{{story.scammer_fullname_or_website}}" />
+                </div>
+                {% if story.scammer_fullname_or_website %}
+                    <h2>{{story.scammer_fullname_or_website|title}}</h2>
+                {% else %}
+                    <h2>Name not provided</h2>
+                {% endif %}
+                <section>
+                    <div class="flex space-between my-1">
+                        <span>Name(s):</span>
+                        {% if story.scammer_fullname_or_website %}
+                            <span>{{story.scammer_fullname_or_website|title}}</span>
+                        {% else %}
+                            <span>Name not provided</span>
+                        {% endif %}
+                    </div>
+
+                    {% if story.scammer_phone_number %}
+                    <div class="flex space-between my-1">
+                        <span>Phone Number(s):</span>
+                        <span>{{story.scammer_phone_number}}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if story.scammer_bank_name or story.scammer_account_number %}
+                    <div class="flex space-between my-1">
+                        <span>Bank detail:</span>
+                        <span>{{story.scammer_bank_name}}, {{story.scammer_account_number}}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if story.scammer_website_or_group_link %}
+                    <div class="flex space-between my-1">
+                        <span>Website url:</span>
+                        <span>{{story.scammer_website_or_group_link}}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if story.scammer_othernames_nickname %}
+                    <div class="flex space-between my-1">
+                        <span>Also known as:</span>
+                        <span>{{story.scammer_othernames_nickname}}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if story.scammer_profession %}
+                    <div class="flex space-between my-1">
+                        <span>Profession(s):</span>
+                        <span>{{story.scammer_profession}}</span>
+                    </div>
+                    {% endif %}
+                </section>
+                {% comment %} 
+                <section>
+                    <div class="my-1">
+                        <span><i class="bi bi-facebook"></i></span>
+                        <span class="pl-1">Mary Williamson</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-instagram"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-tiktok"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-twitter"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                    <div class="my-1">
+                        <span><i class="bi bi-linkedin"></i></span>
+                        <span class="pl-1">@maryw_makeup</span>
+                    </div>
+                </section> 
+                {% endcomment %}
+            </aside>
+        </section>
+    </main>
+    <!-- END MAIN SITE SECTION -->
+{% endblock content %}
