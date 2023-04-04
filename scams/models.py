@@ -72,7 +72,7 @@ class SharedStoriesModel(models.Model):
     scammer_website_or_group_link = models.CharField(
         max_length=255, blank=True, null=True)
     scammer_profile_pic = models.ImageField(
-        default='scampictures/avatar.png', blank=True, null=True, upload_to=upload_location, max_length=1000)
+        default='scampictures/avatar.jpg', blank=True, null=True, upload_to=upload_location, max_length=1000)
 
     # step 6 of the form
     describe_what_happened = models.TextField(blank=False, null=False)

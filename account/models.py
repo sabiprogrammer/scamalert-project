@@ -129,7 +129,7 @@ class Profile(models.Model):
     age_range = models.CharField(
         max_length=10, choices=AGE_RANGE_CHOICES, blank=True, null=True)
     picture = models.ImageField(
-        default='profile/profile_pic_avatar.png', blank=True, null=True, upload_to=upload_location)
+        default='profile/avatar.jpg', blank=True, null=True, upload_to=upload_location)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
