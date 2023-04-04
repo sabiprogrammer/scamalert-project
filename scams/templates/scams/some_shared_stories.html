@@ -50,7 +50,7 @@
                     </p>
                 </section>
                 <section id='append-article'>
-                    {% for story in stories reversed %}
+                    {% for story in stories %}
                     <article class="found-person-reports-container mt-3">
                         <div>
                             <div>
@@ -310,9 +310,8 @@
             .then(response=>response.json())
             .then(data=>{
 
-               
                 postCount = postCount + 3;
-
+                
                 let stories = JSON.parse(data['stories']);
                 
                 // checking if some stories were received from the database
@@ -320,8 +319,8 @@
                     //appending the data to the DOM
                     for(let i = 0; i < stories.length; i++){
                         let story = stories[i]['fields'];
-                        let modifiedImg = story.modified_img || "https://img.freepik.com/free-icon/user_318-804790.jpg";
-                        let userPic = story.modified_user_pic || "https://img.freepik.com/free-icon/user_318-804790.jpg";
+                        let modifiedImg = story.modified_img || "https://media.istockphoto.com/id/1290686368/photo/hacker.jpg?b=1&s=170667a&w=0&k=20&c=61EXABuZoplWNbP6ps4bX0uW6Lv7ld-jQFnrCpo3OCE=";
+                        let userPic = story.modified_user_pic || "https://media.istockphoto.com/id/1290686368/photo/hacker.jpg?b=1&s=170667a&w=0&k=20&c=61EXABuZoplWNbP6ps4bX0uW6Lv7ld-jQFnrCpo3OCE=";
                         let scammerName = story.scammer_fullname_or_website;
                         let infoToPublic = story.info_to_public.substring(0, 70);
                         let whatHappened = story.describe_what_happened.substring(0, 200);
