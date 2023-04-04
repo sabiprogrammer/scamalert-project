@@ -1,0 +1,1 @@
+scamalertng - a web app dedicated towards helping you detect the potential of a particular person or number being a scam. This gives you some sort of confidence before you transact with someone or a platform
